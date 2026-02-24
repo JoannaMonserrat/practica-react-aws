@@ -9,7 +9,7 @@ variable "github_token" {
   sensitive   = true
 }
 
-# Esta parte crea la conexión con Amplify
+# Esta parte crea la conexión on Amplify
 resource "aws_amplify_app" "hola_mundo" {
   name       = "mi-proyecto"
   repository = "https://github.com/JoannaMonserrat/practica-react-aws" # <--- ¡CAMBIA ESTO!
@@ -21,17 +21,17 @@ resource "aws_amplify_app" "hola_mundo" {
       phases:
         preBuild:
           commands:
-            - npm ci
+            - cd mi-proyecto && npm ci
         build:
           commands:
-            - npm run build
+            - cd mi-proyecto && npm run build
       artifacts:
-        baseDirectory: dist
+        baseDirectory: mi-proyecto/dist  # <--- Muy importante añadir el prefijo aquí también
         files:
           - '**/*'
       cache:
         paths:
-          - node_modules/**/*
+          - mi-proyecto/node_modules/**/*
   EOT
 }
 
