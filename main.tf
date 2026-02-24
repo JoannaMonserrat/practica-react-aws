@@ -21,17 +21,17 @@ resource "aws_amplify_app" "hola_mundo" {
       phases:
         preBuild:
           commands:
-            - cd mi-proyecto && npm ci
+            - npm ci
         build:
           commands:
-            - cd mi-proyecto && npm run build
+            - npm run build
       artifacts:
-        baseDirectory: mi-proyecto/dist  # <--- Muy importante añadir el prefijo aquí también
+        baseDirectory: dist  # <--- Solo 'dist' porque es Vite
         files:
           - '**/*'
       cache:
         paths:
-          - mi-proyecto/node_modules/**/*
+          - node_modules/**/*
   EOT
 }
 
